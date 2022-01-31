@@ -1,24 +1,29 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Route, Routes, Navigate } from 'react-router-dom';
-import { appRoutes } from './router';
-
+import { useEffect, useState } from "react"
+import { AuthContext } from "./context"
+import { BrowserRouter } from "react-router-dom"
+import AppRouter from "./components/AppRouter"
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false)
+
+  useEffect(() => {
+    if (localStorage.getItem("auth")) {
+      setIsAuth(true)
+    }
+  }, [])
+
   return (
-    <BrowserRouter>
-      <Routes>
-          {appRoutes.map(route => 
-            <Route
-              key={route.path}
-              element={route.element}
-              path={route.path}
-            />
-          )}
-          <Route path="*" element={<Navigate to="/auth" />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    <AuthContext.Provider
+      value={{
+        isAuth,
+        setIsAuth,
+      }}
+    >
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </AuthContext.Provider>
+  )
 }
 
-export default App;
+export default App
