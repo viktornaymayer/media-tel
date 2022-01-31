@@ -38,6 +38,16 @@ button {
   cursor: pointer;
 }
 
+/* nav */
+nav{
+  padding: 16px 24px;
+  width: 80%;
+  border: 1px solid #e2e2e2;
+  border-top: none;
+  box-shadow: 1px 1px 3px #000;
+  margin: 0 auto 30px;
+  text-align: right;
+}
 
 /* AUTH PAGE */
 .auth_container {
