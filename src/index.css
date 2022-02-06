@@ -45,8 +45,12 @@ nav{
   border: 1px solid #e2e2e2;
   border-top: none;
   box-shadow: 1px 1px 3px #000;
-  margin: 0 auto 30px;
+  margin: 0 auto 50px;
   text-align: right;
+}
+
+nav button:hover{
+  color: #8d44f3
 }
 
 /* AUTH PAGE */
@@ -81,4 +85,53 @@ nav{
 }
 .auth_container p {
   font-size: 28px;
+}
+
+/* User Item */
+.user-item{
+  cursor: pointer;
+  padding: 16px 24px;
+  width: 80%;
+  margin: 0 auto 30px;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: .3s all ease-in-out;
+}
+.user-item:hover{
+  border: 1px solid #2b52ff;
+  box-shadow: 2px 2px 7px #888;
+}
+.user-data{
+  flex:1;
+}
+.user-fio{
+  display: inline-block;
+  width: clamp(300px, 30%, 400px);
+  margin-right: 20px;
+}
+.user-btns button{
+  padding: 4px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  transition: .3s all ease-in-out;
+}
+.btn-edit {
+  border: 2px solid #8d44f3;
+  margin-right: 15px;
+}
+.btn-edit:hover {
+  border: 2px solid #9f64f1;
+  background-color: #8d44f3;
+  color: #e2e2e2;
+}
+.btn-del {
+  border: 2px solid #e91212;
+}
+.btn-del:hover {
+  border: 2px solid #df6565;
+  background-color: #e91212;
+  color: #e2e2e2;
 }
