@@ -1,25 +1,56 @@
-import React, { FC, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import UserList from '../components/UserList';
+import React, { FC, useState } from "react"
+import UserModal from "../components/UserModal"
+import UserList from "../components/UserList"
+import UserService from "../API/UserService"
+import CityService from "../API/CityService"
+import { Link } from "react-router-dom"
+
+type usersProps = {
+  id: string;
+  fio: string;
+  cityId: string;
+}[]
+type cityProps = {
+  id: string;
+  name: string;
+}[]
+type userProps = {
+  id: string;
+  fio: string;
+  cityId: string | undefined;
+}
+
+const usersResponse: usersProps = UserService.getUsers()
+const citiesResponse: cityProps = CityService.getCities()
+const usersInit = usersResponse.map((user: userProps) => {
+  user.cityId = citiesResponse.find(city => city.id === user.cityId)?.name
+  return user
+})
 
 const UsersPage: FC = () => {
 
-  const [users, setUsers] = useState([
-    {id: uuidv4(), fio: 'Ivanov Ivan Ivanovich', cityid: '1'},
-    {id: uuidv4(), fio: 'Semenov Semen Semenovich', cityid: '2'},
-    {id: uuidv4(), fio: 'Sidorov Sidr Sidrovich', cityid: '3'}
-  ])
-  const [cities, setCities] = useState([
-    {id: '1', name: 'Ivanovo'},
-    {id: '2', name: 'Semenovo'},
-    {id: '3', name: 'Sidorovo'}
-  ])
+  const [users, setUsers] =  useState(usersInit)
+
+  const [modal, setModal] = useState(false)
+  const [userForRemove, setUserForRemove] = useState<userProps>(
+    {id: '', fio: '', cityId: ''})
 
   return (
-    <div>
-      <UserList users={users} cities={cities}/>
-    </div>
-  );
-};
+    <>
+      <Link className="btn btn-success add-user-btn" to="/add_user">Add User</Link>
+      <UserModal
+        visible={modal}
+        setVisible={setModal}
+        userForRemove={userForRemove}
+        title="Удаление пользователя"
+      />
+      <UserList
+        users={users}
+        setUserForRemove={setUserForRemove}
+        setVisible={setModal}
+      />
+    </>
+  )
+}
 
-export default UsersPage;
+export default UsersPage

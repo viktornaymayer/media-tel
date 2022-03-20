@@ -5,20 +5,29 @@ type Props = {
   users: {
     id: string
     fio: string
-    cityid: string
+    cityId: string | undefined
   }[]
-  cities: {
-    id: string
-    name: string
-  }[]
+  setUserForRemove: React.Dispatch<React.SetStateAction<
+    {
+      id: string
+      fio: string
+      cityId: string | undefined
+    }>>
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const UserList: FC<Props> = ({ users, cities }) => {
+const UserList: FC<Props> = ({ users, setUserForRemove, setVisible }) => {
   return (
     <div>
       {users.map((user) => {
-        let city = cities.filter((city) => city.id === user.cityid);
-        return <UserItem user={user} city={city[0].name} key={user.id} />
+        return (
+          <UserItem
+            user={user}
+            key={user.id}
+            setUserForRemove={setUserForRemove}
+            setVisible={setVisible}
+          />
+        )
       })}
     </div>
   )

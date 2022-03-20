@@ -1,27 +1,42 @@
-import React, { FC } from 'react';
+import React, { FC } from "react"
+import { Link } from "react-router-dom"
 
 type Props = {
   user: {
-    id: string,
-    fio: string,
-    cityid: string
-  },
-  city: string
+    id: string;
+    fio: string;
+    cityId: string | undefined;
+  }
+  setUserForRemove: React.Dispatch<React.SetStateAction<
+    {
+      id: string;
+      fio: string;
+      cityId: string | undefined;
+    }>>
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const UserItem: FC<Props> = ({user, city}) => {
+const UserItem: FC<Props> = ({ user, setUserForRemove, setVisible }) => {
   return (
-    <div className='user-item'>
+    <Link className="user-item" to={'/users/' + user.id}>
       <div className="user-data">
         <strong className="user-fio">{user.fio}</strong>
-        <span className="user-city">{city}</span>
+        <span className="user-city">{user.cityId}</span>
       </div>
       <div className="user-btns">
-        <button className='btn-edit'>Edit</button>
-        <button className='btn-del'>Del</button>
+        <Link className="btn-primary" to={'/users/' + user.id}>Edit</Link>
+        <button className="btn-danger" onClick={
+          (e) => {
+            e.preventDefault();
+            setVisible(true)
+            console.log(user)
+            setUserForRemove(user)
+          }}>
+          Del
+        </button>
       </div>
-    </div>
-  );
-};
+    </Link>
+  )
+}
 
-export default UserItem;
+export default UserItem

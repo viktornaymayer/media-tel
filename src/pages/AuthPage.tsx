@@ -16,7 +16,7 @@ const AuthPage: FC = () => {
         <h3>Вход</h3>
         <input type="text" placeholder="Логин" />
         <input type="password" placeholder="Пароль" />
-        <button>Войти</button>
+        <button className="btn-success">Войти</button>
       </form>
     </div>
   )
