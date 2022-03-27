@@ -32,17 +32,37 @@ export default class UserService {
     return response
   }
   static getUserById(id){
-    // const response = await axios.get('https://somesite.com/posts/' + id);
+    // const response = await axios.get('https://somesite.com/user/' + id);
     const response = this.getUsers().find(user => user.id === id)
     return response
   }
+
   static addUser(user){
+    /*
+      const response = await axios.post(
+        'https://somesite.com/add_user', 
+        {
+          id: user.id,
+          fio: user.fio,
+          cityId: user.cityId
+        })
+     */
     alert(`The user has been added!\nUser ID: ${user.id}!`)
   }
   static updateUser(user){
+    /*
+      const response = await axios.post(
+        'https://somesite.com/update_user', 
+        {
+          id: user.id,
+          fio: user.fio,
+          cityId: user.cityId
+        })
+     */
     alert(`The user has been updated!\nUser ID: ${user.id}!`)
   }
   static delUser(id){
+    // const response = await axios.delete('https://somesite.com/user/' + id);
     alert(`The user has been removed from the database!\nUser ID: ${id}`)
   }
 }

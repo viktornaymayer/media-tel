@@ -217,12 +217,15 @@ nav button:hover {
   text-transform: uppercase;
 }
 
-/* Add User Page */
-.add-user-page .btn-secondary{
+/* Add User Page / Edit User Page*/
+.add-user-page .btn-secondary,
+.edit-user-page .btn-secondary{
   margin-right: 10px;
 }
 .add-user-page input,
-.add-user-page select {
+.add-user-page select,
+.edit-user-page input,
+.edit-user-page select {
   display: block;
   margin-bottom: 20px;
 }
