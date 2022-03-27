@@ -24,3 +24,4 @@ yarn-error.log*
 
 .gitignore
 _test_task.docx
+.package-lock.json

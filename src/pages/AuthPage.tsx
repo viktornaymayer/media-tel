@@ -11,7 +11,7 @@ const AuthPage: FC = () => {
   }
 
   return (
-    <div className="auth_container">
+    <div className="auth-container">
       <form onSubmit={authFn}>
         <h3>Вход</h3>
         <input type="text" placeholder="Логин" />

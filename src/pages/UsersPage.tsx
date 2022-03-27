@@ -1,23 +1,23 @@
-import React, { FC, useState } from "react"
+import { FC, useState } from "react"
+import { Link } from "react-router-dom"
 import UserModal from "../components/UserModal"
 import UserList from "../components/UserList"
 import UserService from "../API/UserService"
 import CityService from "../API/CityService"
-import { Link } from "react-router-dom"
 
 type usersProps = {
-  id: string;
-  fio: string;
-  cityId: string;
+  id: string,
+  fio: string,
+  cityId: string
 }[]
 type cityProps = {
-  id: string;
-  name: string;
+  id: string,
+  name: string
 }[]
 type userProps = {
-  id: string;
-  fio: string;
-  cityId: string | undefined;
+  id: string,
+  fio: string,
+  cityId: string | undefined
 }
 
 const usersResponse: usersProps = UserService.getUsers()
@@ -36,7 +36,7 @@ const UsersPage: FC = () => {
     {id: '', fio: '', cityId: ''})
 
   return (
-    <>
+    <div className="container">
       <Link className="btn btn-success add-user-btn" to="/add_user">Add User</Link>
       <UserModal
         visible={modal}
@@ -49,7 +49,7 @@ const UsersPage: FC = () => {
         setUserForRemove={setUserForRemove}
         setVisible={setModal}
       />
-    </>
+    </div>
   )
 }
 
