@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useState, useMemo } from "react"
 import { Link } from "react-router-dom"
 import UserModal from "../components/UserModal"
 import UserList from "../components/UserList"
@@ -35,9 +35,49 @@ const UsersPage: FC = () => {
   const [userForRemove, setUserForRemove] = useState<userProps>(
     {id: '', fio: '', cityId: ''})
 
+  const [selectedSort, setSelectedSort] =  useState('')
+  const [selectedSortDirection, setSelectedSortDirection] =  useState(false)
+
+  const sortedUsers = useMemo(() => {
+    if (selectedSort){
+      if(selectedSortDirection){
+        return [...users].sort( (a: any, b: any) => 
+          a[selectedSort].localeCompare(b[selectedSort]))
+      }
+      return [...users].sort( (a: any, b: any) => 
+        b[selectedSort].localeCompare(a[selectedSort]))
+    }
+    return users
+  }, [selectedSort, selectedSortDirection, users])
+
+  function handlerSelectSort(sort: string) : void {
+    setSelectedSort(sort)
+    setSelectedSortDirection(!selectedSortDirection)
+  }
+
   return (
     <div className="container">
       <Link className="btn btn-success add-user-btn" to="/add_user">Add User</Link>
+
+      <div className="sorters">
+        <span
+          className={
+            (selectedSort !== 'fio') ? '' :
+            (selectedSortDirection) ? 'active-sorter desc-sorter' : 'active-sorter asc-sorter' 
+          }
+          onClick={() => handlerSelectSort('fio')}>
+          FIO
+        </span>
+        <span
+          className={
+            (selectedSort !== 'cityId') ? '' :
+            (selectedSortDirection) ? 'active-sorter desc-sorter' : 'active-sorter asc-sorter' 
+          }
+          onClick={() => handlerSelectSort('cityId')}>
+          CITY
+        </span>
+      </div>
+
       <UserModal
         visible={modal}
         setVisible={setModal}
@@ -45,7 +85,7 @@ const UsersPage: FC = () => {
         title="Удаление пользователя"
       />
       <UserList
-        users={users}
+        users={sortedUsers}
         setUserForRemove={setUserForRemove}
         setVisible={setModal}
       />

@@ -183,6 +183,47 @@ nav button:hover {
   margin-right: 15px;
 }
 
+/* sorter */
+.sorters{
+  padding-left: 12px;
+  margin-bottom: 15px;
+}
+.sorters span{
+  position: relative;
+  cursor: pointer;
+  margin-right: 50px;
+  transition: 0.3s all ease-in-out;
+}
+.sorters span::after{
+  content:'';
+  position: absolute;
+  right: -16px;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  transform-origin: center;
+  border-bottom: 2px solid #000;
+  border-right: 2px solid #000;
+  transform: rotate(45deg);
+  transition: 0.3s all ease-in-out;
+}
+
+.sorters span.active-sorter{
+  color:#8d44f3;
+}
+.sorters span.active-sorter::after{
+  border-bottom: 2px solid #8d44f3;
+  border-right: 2px solid #8d44f3;
+}
+.sorters span.asc-sorter::after{
+  transform: rotate(-135deg);
+}
+.sorters span.desc-sorter::after{
+  transform: rotate(45deg);
+}
+
+
+
 /* modal */
 .modal {
   position: fixed;
