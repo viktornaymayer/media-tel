@@ -12,14 +12,15 @@ type Props = {
 
 const SelectCity: FC<Props> = (props) => {
   const citiesResponse: cityProps = CityService.getCities()
+  const defaultVal = props.userCityId || 'Choose the city'
+
   return (
-    <select onChange={e => props.setUserCity(e.target.value)}>
-      <option disabled selected={props.userCityId ? false : true}>Choose the city</option>
+    <select
+      defaultValue={defaultVal}
+      onChange={e => props.setUserCity(e.target.value)}>
+      <option disabled value={'Choose the city'}>Choose the city</option>
       {citiesResponse.map(city => 
-        <option
-          value = {city.id}
-          key = {city.id}
-          selected = {props.userCityId === city.id ? true : false}>
+        <option value = {city.id} key = {city.id}>
           {city.name}
         </option>
       )}

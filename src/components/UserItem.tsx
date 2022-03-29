@@ -29,7 +29,6 @@ const UserItem: FC<Props> = ({ user, setUserForRemove, setVisible }) => {
           (e) => {
             e.preventDefault();
             setVisible(true)
-            console.log(user)
             setUserForRemove(user)
           }}>
           Del
