@@ -20,7 +20,7 @@ const Sorter: FC<Props> = ({
   }
 
   return (
-    <div className="sorter">
+    <div className="sorters">
       <span
         className={
           (selectedSort !== 'fio') ? '' :
