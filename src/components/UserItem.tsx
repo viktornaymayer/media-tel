@@ -24,7 +24,7 @@ const UserItem: FC<Props> = ({ user, setUserForRemove, setVisible }) => {
         <span className="user-city">{user.cityId}</span>
       </div>
       <div className="user-btns">
-        <Link className="btn-primary" to={'/users/' + user.id}>Edit</Link>
+        <button className="btn-primary">Edit</button>
         <button className="btn-danger" onClick={
           (e) => {
             e.preventDefault();

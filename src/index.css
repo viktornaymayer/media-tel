@@ -179,7 +179,7 @@ nav button:hover {
   border-radius: 3px;
   text-transform: uppercase;
 }
-.user-btns a:first-child{
+.user-btns button:first-child{
   margin-right: 15px;
 }
 
