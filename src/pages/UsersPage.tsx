@@ -4,6 +4,7 @@ import UserModal from "../components/UserModal"
 import UserList from "../components/UserList"
 import UserService from "../API/UserService"
 import CityService from "../API/CityService"
+import Pagination from "../components/Pagination"
 
 type usersProps = {
   id: string,
@@ -55,6 +56,14 @@ const UsersPage: FC = () => {
     setSelectedSortDirection(!selectedSortDirection)
   }
 
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1)
+  const usersLimitOnPage = 3
+  const countOfPages = Math.ceil(sortedUsers.length / usersLimitOnPage)
+  const indexOfLastUser = currentPage * usersLimitOnPage
+  const indexOfFirstUser = indexOfLastUser - usersLimitOnPage
+  const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
+
   return (
     <div className="container">
       <Link className="btn btn-success add-user-btn" to="/add_user">Add User</Link>
@@ -85,10 +94,14 @@ const UsersPage: FC = () => {
         title="Удаление пользователя"
       />
       <UserList
-        users={sortedUsers}
+        users={currentUsers}
         setUserForRemove={setUserForRemove}
         setVisible={setModal}
       />
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        countOfPages={countOfPages}/>
     </div>
   )
 }

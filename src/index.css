@@ -222,7 +222,27 @@ nav button:hover {
   transform: rotate(45deg);
 }
 
-
+/* pagination */
+.pagination .btn {
+  border: 2px solid #9f64f1;
+  font-weight: 900;
+  color: #8d44f3;
+  width: 40px;
+  height: 40px;
+  line-height: 1;
+  margin-right: 15px;
+  transition: 0.3s all ease-in-out;
+}
+.pagination .btn:hover {
+  color: #fff;
+  background: #9f64f1;
+  border: 2px solid #000;
+}
+.pagination .btn-disabled {
+  border: 2px solid #a2a2a2;
+  color: #a2a2a2;
+  pointer-events: none;
+}
 
 /* modal */
 .modal {
