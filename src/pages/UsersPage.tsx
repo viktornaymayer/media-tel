@@ -5,6 +5,7 @@ import UserList from "../components/UserList"
 import UserService from "../API/UserService"
 import CityService from "../API/CityService"
 import Pagination from "../components/Pagination"
+import Sorter from "../components/Sorter"
 
 type usersProps = {
   id: string,
@@ -30,15 +31,14 @@ const usersInit = usersResponse.map((user: userProps) => {
 
 const UsersPage: FC = () => {
 
-  const [users, setUsers] =  useState(usersInit)
-
+  const [users] =  useState(usersInit)
   const [modal, setModal] = useState(false)
   const [userForRemove, setUserForRemove] = useState<userProps>(
     {id: '', fio: '', cityId: ''})
 
+  // sorting
   const [selectedSort, setSelectedSort] =  useState('')
   const [selectedSortDirection, setSelectedSortDirection] =  useState(false)
-
   const sortedUsers = useMemo(() => {
     if (selectedSort){
       if(selectedSortDirection){
@@ -51,11 +51,6 @@ const UsersPage: FC = () => {
     return users
   }, [selectedSort, selectedSortDirection, users])
 
-  function handlerSelectSort(sort: string) : void {
-    setSelectedSort(sort)
-    setSelectedSortDirection(!selectedSortDirection)
-  }
-
   // pagination
   const [currentPage, setCurrentPage] = useState(1)
   const usersLimitOnPage = 3
@@ -66,27 +61,15 @@ const UsersPage: FC = () => {
 
   return (
     <div className="container">
-      <Link className="btn btn-success add-user-btn" to="/add_user">Add User</Link>
-
-      <div className="sorters">
-        <span
-          className={
-            (selectedSort !== 'fio') ? '' :
-            (selectedSortDirection) ? 'active-sorter desc-sorter' : 'active-sorter asc-sorter' 
-          }
-          onClick={() => handlerSelectSort('fio')}>
-          FIO
-        </span>
-        <span
-          className={
-            (selectedSort !== 'cityId') ? '' :
-            (selectedSortDirection) ? 'active-sorter desc-sorter' : 'active-sorter asc-sorter' 
-          }
-          onClick={() => handlerSelectSort('cityId')}>
-          CITY
-        </span>
-      </div>
-
+      <Link className="btn btn-success add-user-btn" to="/add_user">
+        Add User
+      </Link>
+      <Sorter
+        selectedSort={selectedSort}
+        setSelectedSort={setSelectedSort}
+        selectedSortDirection={selectedSortDirection}
+        setSelectedSortDirection={setSelectedSortDirection}
+      />
       <UserModal
         visible={modal}
         setVisible={setModal}
